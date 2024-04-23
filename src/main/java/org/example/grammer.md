@@ -763,6 +763,7 @@ public class DiceRoller {
     // it's a global variable, so all methods(include constructor) can access it 
     Random random;
     int number;
+    
 
     Diceroller() {
         random = new Random();
@@ -776,4 +777,41 @@ public class DiceRoller {
         System.out.println(number);
     }
 }
+```
+
+## 29. overloaded constructors
+
+* overloaded constructors: multiple constructors within a class with the same name but different parameters
+```java
+public class Pizza {
+    // attributes
+    String name;
+    String size;
+    String crust;
+    double price;
+
+    // overloaded constructor
+    // when create a pizza object, we can pass different arguments 
+    // and overload the constructor will create different objects
+    Pizza(String name, String size, String crust) {
+        this.name = name;
+        this.size = size;
+        this.crust = crust;
+    }
+    Pizza(String name, String size, String crust, double price) {
+        this.name = name;
+        this.size = size;
+        this.crust = crust;
+        this.price = price;
+    }
+    
+    
+}
+```
+
+## 30. toString() method
+* toString() method: returns a string representation of the object
+* when we print an object, it will call the toString() method
+```java
+
 ```
