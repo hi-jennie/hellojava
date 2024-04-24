@@ -6,14 +6,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // create a Car instance
-        Car car = new Car("BMW");
-        Car car1 = new Car("Tesla");
+        Friend friend1 = new Friend("Rustin");
+        Friend friend2 = new Friend("Turkey");
 
-        // create a Garage instance
-        Garage garage = new Garage();
-        // call its park method, pass(only) a Car object named car
-        garage.park(car);
+        // we can access the static attribute without creating an object but using the class name
+        System.out.println(Friend.numberOfFriends);
     }
 }
 

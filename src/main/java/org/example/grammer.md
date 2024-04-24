@@ -909,3 +909,33 @@ public class Main {
 }
 ```
 
+## 33. static keyword
+modifier: a single copy of a variable or method is created and shared
+this class "owns" the static member
+```java
+public class Friend {
+    String name;
+    // with static modifier, this attribute belongs to the class
+    // therefore it isn't unique to each object, but shared by all objects
+    // but we cat access it without creating an object
+    static int numberOfFriends;
+    
+    Friend(String name){
+        this.name = name;
+        numberOfFriends++;
+    }
+    
+    static void displayFriends(){
+        System.out.println("You have "+numberOfFriends+" friends");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        Friend friend1 = new Friend("Rustin");
+        Friend friend2 = new Friend("Turkey");
+
+        // we can access the static attribute without creating an object but using the class name
+        System.out.println(Friend.numberOfFriends);
+    }
+}
+```
