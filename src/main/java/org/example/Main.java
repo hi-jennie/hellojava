@@ -6,18 +6,14 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        // create an array list of Food
+        // create a Car instance
+        Car car = new Car("BMW");
+        Car car1 = new Car("Tesla");
 
-        Food food1 = new Food("Apple");
-        Food food2 = new Food("Banana");
-        Food food3 = new Food("Orange");
-
-        Food[] refrigerator = {food1, food2, food3};
-
-        System.out.println(refrigerator[0].name);
-        System.out.println(refrigerator[1].name);
-
-
+        // create a Garage instance
+        Garage garage = new Garage();
+        // call its park method, pass(only) a Car object named car
+        garage.park(car);
     }
 }
 

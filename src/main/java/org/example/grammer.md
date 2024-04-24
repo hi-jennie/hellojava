@@ -885,3 +885,27 @@ public class Main {
 
 ```
 
+## 32. object passing as arguments
+pay attention:we have to declare the class of this parameters
+```java
+public class Garage {
+    // park method accept a car parameter, it belongs to Car class
+    // therefore we can't pass in parameter of other class
+    void park(Car car){
+        System.out.println("The "+car.name+" is parked in this garage");
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        // create a Car instance
+        Car car = new Car("BMW");
+        Car car1 = new Car("Tesla");
+
+        // create a Garage instance
+        Garage garage = new Garage();
+        // call its park method, pass(only) a Car object named car
+        garage.park(car);
+    }
+}
+```
+
