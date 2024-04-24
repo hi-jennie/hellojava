@@ -7,7 +7,7 @@ public class DiceRoller {
     Random random;
     int number;
 
-    Diceroller() {
+    DiceRoller() {
         random = new Random();
         roller();
     }

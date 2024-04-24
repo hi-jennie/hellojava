@@ -813,5 +813,75 @@ public class Pizza {
 * toString() method: returns a string representation of the object
 * when we print an object, it will call the toString() method
 ```java
+class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+    
+    // we can use toString() to return a string representation of the object
+    @Override
+    public String toString() {
+        return "My name is " + name + ", I'm " + age + " years old.";
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Alice", 30);
+        
+        // be used implicitly
+        System.out.println(person); // 输出：My name is Alice, I'm 30 years old.
+        // be used explicitly
+        System.out.println(person.toString()); // 输出：My name is Alice, I'm 30 years old.
+    }
+}
+```
+
+## 31. array of objects
+```java
+public class Food {
+    String name;
+
+    Food (String name){
+        this.name = name;
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        // create an array list of Food
+        Food[] refrigerator = new Food[3];
+        Food food1 = new Food("Apple");
+        Food food2 = new Food("Banana");
+        Food food3 = new Food("Orange");
+
+        refrigerator[0] = food1;
+        refrigerator[1] = food2;
+        refrigerator[2] = food3;
+
+        System.out.println(refrigerator[0].name);
+        System.out.println(refrigerator[1].name);
+
+
+    }
+}
+public class Main {
+    public static void main(String[] args) {
+        // create an array list of Food
+
+        Food food1 = new Food("Apple");
+        Food food2 = new Food("Banana");
+        Food food3 = new Food("Orange");
+
+        Food[] refrigerator = {food1, food2, food3};
+
+        System.out.println(refrigerator[0].name);
+        System.out.println(refrigerator[1].name);
+    }
+}
 
 ```
+
