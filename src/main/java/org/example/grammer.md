@@ -155,8 +155,8 @@ public static void main(String[] args) {
     }
 ```
 
-
 ## 7. Math class
+
 Math.abs(): 返回参数的绝对值。  <pre>int a = Math.abs(-10); // a = 10 </pre>
 Math.max(a, b): 返回两个参数中的最大值。  <pre>int b = Math.max(3, 9); // b = 9 </pre>
 Math.min(a, b): 返回两个参数中的最小值。  <pre>int c = Math.min(3, 9); // c = 3 </pre>
@@ -166,7 +166,8 @@ Math.pow(a, b): 返回第一个参数的第二个参数次方。  <pre>double f 
 Math.round(a): 返回最接近参数的整数。  <pre>long g = Math.round(3.6); // g = 4 </pre>
 Math.ceil(a): 返回大于或等于参数的最小整数。  <pre>double h = Math.ceil(3.2); // h = 4.0 </pre>
 Math.floor(a): 返回小于或等于参数的最大整数。  <pre>double i = Math.floor(3.8); // i = 3.0 </pre>
-Math.random(): 返回一个介于0.0（包含）和1.0（不包含）之间的随机数。  <pre>double j = Math.random(); 
+Math.random(): 返回一个介于0.0（包含）和1.0（不包含）之间的随机数。  <pre>double j = Math.random(); </pre>
+
 
 ## 8. random number
 
@@ -344,8 +345,8 @@ public static void main(String[] args) {
 ```
 
 ## 14. nested loops
-print: display on the same line
-println: display on the next line
+* print: display on the same line
+* println: display on the next line
 ```java
 public static void main(String[] args) {
     Scanner scanner = new Scanner(System.in);
@@ -936,6 +937,47 @@ public class Main {
 
         // we can access the static attribute without creating an object but using the class name
         System.out.println(Friend.numberOfFriends);
+    }
+}
+```
+## 34. inheritance
+keyword: child class extends parent class
+```java
+// parent class
+public class Vehicle {
+    // this attribute is common to all vehicles including bicycles and cars
+    double speed;
+
+    void go(){
+        System.out.println("This vehicle is moving");
+    }
+
+    void stop(){
+        System.out.println("This vehicle is stopped");
+    }
+}
+
+// extends is a keyword that is used to create a subclass of another class
+// in this case, Bicycle is a subclass of Vehicle
+public class Bicycle extends Vehicle{
+    // this attribute is unique to the Bicycle class
+    int wheels = 2;
+    int pedals = 2;
+}
+
+public class Car2 extends Vehicle{
+    // this attribute is unique to the Car class
+    int wheels = 4;
+    int doors = 4;
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Bicycle bike = new Bicycle();
+        // in this case, the go method from the Vehicle class is called
+        bike.go();
+        // we can gain access to the parent class's methods and fields
+        System.out.println(bike.speed);
     }
 }
 ```

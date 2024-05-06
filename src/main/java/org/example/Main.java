@@ -6,11 +6,11 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Friend friend1 = new Friend("Rustin");
-        Friend friend2 = new Friend("Turkey");
-
-        // we can access the static attribute without creating an object but using the class name
-        System.out.println(Friend.numberOfFriends);
+        Bicycle bike = new Bicycle();
+        // in this case, the go method from the Vehicle class is called
+        bike.go();
+        // we can gain access to the parent class's methods and fields
+        System.out.println(bike.speed);
     }
 }
 
