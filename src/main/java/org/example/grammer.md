@@ -981,3 +981,25 @@ public class Main {
     }
 }
 ```
+
+## 35. method overriding
+* symbol: @Override
+* usage: to provide a specific implementation of a method that is already provided by its superclass
+* implementation order: child class method > parent class method
+* feature:child class and parent class share the same method name
+```java
+public class Animal{
+    void speak(){
+        System.out.println("This animal speaks");
+    }
+}
+
+public class Dog extends Animal{
+    // override the speak method in the parent class
+    @Override
+    void speak(){
+        System.out.println("This dog barks");
+    }
+}
+
+```
