@@ -1003,3 +1003,45 @@ public class Dog extends Animal{
 }
 
 ```
+
+## 36. super keyword
+* super keyword: refers to the superclass (parent) of an object
+```java
+public class Person {
+    String name;
+    int age;
+
+    // constructor
+    Person(String name, int age){
+        this.name = name;
+        this.age = age;
+    }
+
+    public String toString(){
+        return "Name: " + name + " Age: " + age;
+    }
+}
+
+public class Hero extends Person{
+    String power;
+
+    // constructor
+    Hero(String name,int age,String power){
+        // in this case, the constructor from the parent class is called.super() = Person(
+        super(name,age);
+        this.power = power;
+    }
+
+    public String toString(){
+        // in this case, the toString method from the parent class is called
+        return super.toString() + " Power: " + this.power;
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Hero hero = new Hero("Superman", 30, "Fly");
+        System.out.println(hero.toString());
+    }
+}
+```

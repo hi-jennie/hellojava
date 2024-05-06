@@ -6,11 +6,8 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Bicycle bike = new Bicycle();
-        // in this case, the go method from the Vehicle class is called
-        bike.go();
-        // we can gain access to the parent class's methods and fields
-        System.out.println(bike.speed);
+        Hero hero = new Hero("Superman", 30, "Fly");
+        System.out.println(hero.toString());
     }
 }
 
