@@ -941,7 +941,7 @@ public class Main {
 }
 ```
 ## 34. inheritance
-keyword: child class extends parent class
+keyword: child class **extends** parent class
 ```java
 // parent class
 public class Vehicle {
@@ -983,7 +983,7 @@ public class Main {
 ```
 
 ## 35. method overriding
-* symbol: @Override
+* **symbol: @Override**
 * usage: to provide a specific implementation of a method that is already provided by its superclass
 * implementation order: child class method > parent class method
 * feature:child class and parent class share the same method name
@@ -1005,7 +1005,7 @@ public class Dog extends Animal{
 ```
 
 ## 36. super keyword
-* super keyword: refers to the superclass (parent) of an object
+* **super keyword**: refers to the superclass (parent) of an object
 ```java
 public class Person {
     String name;
@@ -1042,6 +1042,32 @@ public class Main {
     public static void main(String[] args) {
         Hero hero = new Hero("Superman", 30, "Fly");
         System.out.println(hero.toString());
+    }
+}
+```
+
+## 37. abstraction
+* **keyword: abstract**
+* usage: to provide a blueprint for other classes,force subclasses to provide an implementation
+* advantage1: hide certain details and only show the important details of an object
+* advantage2: reduce the complexity of the code
+* advantage3: increase security
+
+```java
+// abstract class
+public abstract class Animal {
+    // abstract method
+    // this method doesn't have a body(it cannot be instantiated)
+    // it's up to the subclass to provide an implementation
+    abstract void sound();
+}
+
+// subclass
+public class Dog extends Animal{
+    // provide an implementation for the sound method
+    @Override
+    void sound(){
+        System.out.println("The dog barks");
     }
 }
 ```
