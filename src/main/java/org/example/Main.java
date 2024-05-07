@@ -1,6 +1,7 @@
 package org.example;
 import com.sun.security.jgss.GSSUtil;
 
+import java.io.File;
 import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
@@ -9,30 +10,21 @@ import java.util.Scanner;
 
 public class Main {
     public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        try {
-            System.out.println("Enter a whole number to divide");
-            int x = scanner.nextInt();
-            System.out.println("Enter a whole number to divide by");
-            int y  = scanner.nextInt();
+        // 相对路径：这个文件在这个project里就可以直接用文件名
+        File file = new File("Jennie.txt");
 
-            int z = x/y;
-            System.out.println("result"+z);
+        if(file.exists()){
+            System.out.println("This file exists!");
+            // other useful method
+            System.out.println(file.getPath());
+            System.out.println(file.getAbsoluteFile());
+            System.out.println(file.isFile()); // return boolean
+            file.delete(); // delete file after finishing this execution
         }
-        catch(ArithmeticException a){
-            System.out.println("zero division error");
-        }
-        catch(InputMismatchException i){
-            System.out.println("please enter a number");
-        }
-        catch(Exception e){
-            System.out.println("something goes wrong");
+        else{
+            System.out.println("This file doesn't exist!");
         }
 
-        finally {
-            scanner.close();
-            System.out.println("this block will always be executed");
-        }
     }
 }
 

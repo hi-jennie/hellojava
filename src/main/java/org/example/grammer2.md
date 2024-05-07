@@ -155,3 +155,26 @@ public class Main {
 }
 ```
 
+## 45.File class
+how to create a .txt file
+```java
+public class Main {
+    public static void main(String[] args) {
+        // 相对路径：这个文件在这个project里就可以直接用文件名
+        File file = new File("Jennie.txt");
+
+        if(file.exists()){
+            System.out.println("This file exists!");
+            // other useful method
+            System.out.println(file.getPath());
+            System.out.println(file.getAbsoluteFile());
+            System.out.println(file.isFile()); // return boolean
+            file.delete(); // delete file after finishing this execution
+        }
+        else{
+            System.out.println("This file doesn't exist!");
+        }
+
+    }
+}
+```
