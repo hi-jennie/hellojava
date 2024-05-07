@@ -157,7 +157,9 @@ public class Main {
 
 ## 45.File class
 how to create a .txt file
+import java.io.File;
 ```java
+import java.io.File;
 public class Main {
     public static void main(String[] args) {
         // 相对路径：这个文件在这个project里就可以直接用文件名
@@ -176,5 +178,22 @@ public class Main {
         }
 
     }
+}
+```
+## 46. FileWriter
+```java
+import java.io.FileWriter;
+import java.io.IOException;
+public static void main(String[] args) {
+  try {
+    FileWriter writer = new FileWriter("Jennie.txt");
+    writer.write("My name is Jennie\nI'm 24 years old");
+    // append at the end of the file
+    writer.append("Jennie's information");
+    writer.close();
+  }
+  catch (IOException e){
+    e.printStackTrace();
+  }
 }
 ```
