@@ -238,12 +238,15 @@ public class Main {
         File file = new File("audio.wav");
     
         // Create an AudioInputStream from the audio file
+        // 我的理解是：将这个文件转换为一个可以被播放的音频流
         AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
     
         // Create a Clip to play the audio
+        // 我的理解是：创建一个可以播放音频的对象
         Clip clip = AudioSystem.getClip();
     
         // Open the audio clip
+        // 我的理解是：将音频流放入这个对象中
         clip.open(audioStream);
         String response = "";
     
@@ -273,5 +276,29 @@ public class Main {
         }
       }
 }
+```
+## 49. GUI
+```java
+import javax.swing.*;
+import java.awt.*;
+public class JennieFrame extends JFrame {
+    JennieFrame() {
+        this.setSize(500, 500);// set the size of the frame
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);// set the close button to exit the program
+        this.setVisible(true);// make this visible
+        this.setTitle("first GUI of Jennie");// set the title of the frame
+        this.setResizable(false);// make it so that the frame cannot be resized
 
+        ImageIcon image = new ImageIcon("cat.png");// create an ImageIcon
+        this.setIconImage(image.getImage());// set the icon of the frame
+        this.getContentPane().setBackground(Color.pink);// set the background color of the frame
+
+    }
+}
+public class Main {
+  public static void main(String[] args) {
+    new JennieFrame();
+    // JennieFrame jennieFrame = new JennieFrame();
+  }
+}
 ```
