@@ -1071,3 +1071,41 @@ public class Dog extends Animal{
     }
 }
 ```
+
+## 38. access modifiers
+* **public modifier**: can be accessed from any class in the same project
+* if we want to use a method or attribute from another package, we have to use the public modifier and import the class
+* or else,this method or attribute can only be accessed within the current package
+```java
+public class Person {
+    // public attribute
+    public String name;
+    // public method
+    public void speak(){
+        System.out.println("This person speaks");
+    }
+}
+```
+* **protected modifier**: can be accessed within the same package or by subclasses in different packages
+```java
+public class Person {
+    // protected attribute
+    protected String name;
+    // protected method
+    protected void speak(){
+        System.out.println("This person speaks");
+    }
+}
+
+```
+* private modifier*: can only be accessed within the current class,so we can't access it from other classes
+```java
+public class Person {
+    // private attribute
+    private String name;
+    // private method
+    private void speak(){
+        System.out.println("This person speaks");
+    }
+}
+```
