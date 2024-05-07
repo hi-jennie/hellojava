@@ -9,22 +9,43 @@ import java.util.ArrayList;
 import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
+import javax.sound.sampled.*;
 
 
 public class Main {
-    public static void main(String[] args) {
-        try {
-            FileReader reader = new FileReader("Jennie.txt");
-            int data = reader.read();
-            while (data != -1) {
-                // When you cast this integer to a char, it gets converted to the corresponding character as per the ASCII table.
-                // For example, if data is 65, (char) data would be 'A', because 65 is the ASCII value for 'A'.
-                System.out.print((char) data);
-                data = reader.read();
+    public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+        Scanner scanner = new Scanner(System.in);
+
+        File file = new File("audio.wav");
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+        Clip clip = AudioSystem.getClip();
+        clip.open(audioStream);
+
+        String response = "";
+
+        while(!response.equals("Q")) {
+            System.out.println("P = play,S = stop,R = reset,Q = quit");
+            System.out.println("enter your choice");
+
+            response = scanner.next();
+            response = response.toUpperCase();
+
+            switch (response) {
+                case ("P"):
+                    clip.start();
+                    break;
+                case ("S"):
+                    clip.stop();
+                    break;
+                case ("R"):
+                    clip.setMicrosecondPosition(0);
+                    break;
+                case ("Q"):
+                    clip.close();
+                    break;
+                default:
+                    System.out.println("Not a valid response");
             }
-        }
-        catch (IOException e){
-            e.printStackTrace();
         }
     }
 }

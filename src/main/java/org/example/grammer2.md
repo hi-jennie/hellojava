@@ -224,3 +224,54 @@ public class Main {
   }
 }
 ```
+## 48.audio
+```java
+import javax.sound.sampled.*;
+import java.io.File;
+import java.io.scanner;
+public class Main {
+    public static void main(String[] args) throws IOException, UnsupportedAudioFileException, LineUnavailableException{
+        // Create a Scanner object for user input
+        Scanner scanner = new Scanner(System.in);
+    
+        // Create a File object for the audio file
+        File file = new File("audio.wav");
+    
+        // Create an AudioInputStream from the audio file
+        AudioInputStream audioStream = AudioSystem.getAudioInputStream(file);
+    
+        // Create a Clip to play the audio
+        Clip clip = AudioSystem.getClip();
+    
+        // Open the audio clip
+        clip.open(audioStream);
+        String response = "";
+    
+        while(!response.equals("Q")) {
+          System.out.println("P = play,S = stop,R = reset,Q = quit");
+          System.out.println("enter your choice");
+    
+          response = scanner.next();
+          response = response.toUpperCase();
+    
+          switch (response) {
+            case ("P"):
+              clip.start();
+              break;
+            case ("S"):
+              clip.stop();
+              break;
+            case ("R"):
+              clip.setMicrosecondPosition(0);
+              break;
+            case ("Q"):
+              clip.close();
+              break;
+            default:
+              System.out.println("Not a valid response");
+          }
+        }
+      }
+}
+
+```
