@@ -1,4 +1,4 @@
-# ** java notes——basic knowledge**
+# ** java notes——basic knowledge 1- 40**
 
 ## 1. Java tutorial for beginner
 
@@ -1109,3 +1109,57 @@ public class Person {
     }
 }
 ```
+
+## 39.encapsulation
+* **encapsulation**: a mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit
+* instruction: 
+    * attributes of a class will be hidden or private
+    * can be access only through methods(getters and setters)
+    * we should make attributes private if we don't want them to be changed directly / we don't have a reason to make them public/protected
+```java
+public class Car {
+    private String make;
+    private String model;
+    
+    // Car(String make,String model,int year){
+    //    this.make = make;
+    //    this.model = model;
+    // }
+    Car(String make,String model){
+       setMake(make);
+       setModel(model);
+    }
+    // this getter is public,it's important
+    public String getMake(){
+        return make;
+    }
+    
+    public string getModel(){
+        return model;
+    }
+
+    public void setMake(string make){
+        this.model = model;
+    }
+    public void setModel(string model){
+        this.model = model;
+    }
+    // we need to change the constructor
+    
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        
+        // in Car class ,all three attributes are private
+        // therefore, we can't gain access to or change it directly
+        // car.make
+        // car.make = chevrolet
+        System.out.println(car.getMake());
+        car.setModel(Tesla);
+    }
+}
+```
+
+## 40. copy objects
