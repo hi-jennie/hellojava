@@ -1112,10 +1112,18 @@ public class Person {
 
 ## 39.encapsulation
 * **encapsulation**: a mechanism of wrapping the data (variables) and code acting on the data (methods) together as a single unit
-* instruction: 
+* instruction:
     * attributes of a class will be hidden or private
     * can be access only through methods(getters and setters)
     * we should make attributes private if we don't want them to be changed directly / we don't have a reason to make them public/protected
+## 40.copy objects
+two ways to copy objects
+* copy the address
+* copy the value
+  * **overload constructor**: the main step to copy the object
+  * **copy method**: the main step to copy the object
+
+
 ```java
 public class Car {
     private String make;
@@ -1129,6 +1137,12 @@ public class Car {
        setMake(make);
        setModel(model);
     }
+
+    // overload constructor(main step to copy the object)
+    Car(Car x){
+        copy(x);
+    }
+    
     // this getter is public,it's important
     public String getMake(){
         return make;
@@ -1143,23 +1157,33 @@ public class Car {
     }
     public void setModel(string model){
         this.model = model;
-    }
-    // we need to change the constructor
+    }// we need to change the constructor
     
+    // the main step to copy the object
+    public copy(Car x){
+        this.model = setModel(x.getModel());
+        this.year = setModel(x.getYear());
+    }
 }
 
 public class Main {
     public static void main(String[] args) {
-        Car car = new Car();
+        Car car1 = new Car("Chevrolet","Camaro");
+        Car car2 = new Car("Ford","Mustang");
         
         // in Car class ,all three attributes are private
         // therefore, we can't gain access to or change it directly
         // car.make
         // car.make = chevrolet
-        System.out.println(car.getMake());
-        car.setModel(Tesla);
+        System.out.println(car1.getMake());
+        car1.setModel(Camero);
+
+        // car2 = car1  (copy the address not the value)
+        // call the copy method,reset the value of car2
+        Car2.copy(car1);
+        
+        // another way to copy the object,create a copy directly by using overload constructor
+        Car car2 = new Car(car1);
     }
 }
 ```
-
-## 40. copy objects
