@@ -216,6 +216,7 @@ public class Main {
         System.out.print((char) data);
         data = reader.read();
       }
+      reader.close();
     }
     catch (IOException e){
       e.printStackTrace();
