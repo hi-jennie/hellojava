@@ -1,21 +1,37 @@
 package org.example;
+import com.sun.security.jgss.GSSUtil;
+
 import java.util.ArrayList;
+import java.util.InputMismatchException;
 import java.util.Random;
 import java.util.Scanner;
 
 
 public class Main {
     public static void main(String[] args) {
-        Car car = new Car();
-        Boat boat = new Boat();
+        Scanner scanner = new Scanner(System.in);
+        try {
+            System.out.println("Enter a whole number to divide");
+            int x = scanner.nextInt();
+            System.out.println("Enter a whole number to divide by");
+            int y  = scanner.nextInt();
 
-        // Car[] racers = {car,boat};
-        // because both car and boat belong to vehicle,so it's better to contain them in a Vehicle date type
-        Vehicle[] racers = {car,boat};
+            int z = x/y;
+            System.out.println("result"+z);
+        }
+        catch(ArithmeticException a){
+            System.out.println("zero division error");
+        }
+        catch(InputMismatchException i){
+            System.out.println("please enter a number");
+        }
+        catch(Exception e){
+            System.out.println("something goes wrong");
+        }
 
-        // we can use for-each loop to call go method one by one
-        for(Vehicle x : racers) {
-            x.go();
+        finally {
+            scanner.close();
+            System.out.println("this block will always be executed");
         }
     }
 }
