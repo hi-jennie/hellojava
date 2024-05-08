@@ -636,3 +636,44 @@ public class Main {
     }
 }
 ```
+
+## 59.TextField
+* a text field is a UI component that allows the user to enter or edit text
+* please pay attention to the order of adding components
+```java
+public class MyFrame extends JFrame implements ActionListener {
+    JButton button;
+    JTextField textField;
+    MyFrame(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+
+        button = new JButton("submit");
+        button.addActionListener((ActionListener) this); // add action listener
+
+        textField = new JTextField();
+        textField.setPreferredSize(new Dimension(200,30));
+        textField.setBackground(Color.pink);
+        textField.setFont(new Font("Consolas",Font.BOLD,20));
+        textField.setForeground(Color.BLACK);
+        textField.setText("username");
+
+        this.add(button);
+        this.add(textField);
+        this.setSize(500,500);
+        this.setVisible(true);
+        // pack() method sizes the frame so that all its contents are at or above their preferred sizes.
+        this.pack();
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==button){
+            System.out.println("hello "+textField.getText());
+            // set the button to be disabled after clicking
+            button.setEnabled(false);
+            // set the text field to be uneditable after clicking
+            textField.setEditable(false);
+        }
+    }
+}
+```

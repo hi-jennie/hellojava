@@ -6,47 +6,34 @@ import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame implements ActionListener {
     JButton button;
-    JLabel dreamLabel;
+    JTextField textField;
     MyFrame(){
-        dreamLabel = new JLabel();
-        button = new JButton();
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
 
-        ImageIcon dreamIcon = new ImageIcon("Dream.png");
-        dreamLabel.setIcon(dreamIcon);
-        dreamLabel.setVisible(false);
-        dreamLabel.setBounds(0,0,500,500);
-
-
-        button.setBounds(500,250,500,600);
-        button.setBackground(Color.pink);
-        button.setFocusable(false); // remove the blue border
-        button.setBorder(BorderFactory.createEtchedBorder()); // add border
+        button = new JButton("submit");
         button.addActionListener((ActionListener) this); // add action listener
 
-        button.setText("what's matter with you?");
-        button.setHorizontalTextPosition(JButton.CENTER);
-        button.setVerticalTextPosition(JButton.TOP);
-        button.setFont(new Font("Comic Sans",Font.BOLD,25));
-        button.setForeground(Color.pink);
+        textField = new JTextField();
+        textField.setPreferredSize(new Dimension(200,30));
+        textField.setBackground(Color.pink);
+        textField.setFont(new Font("Consolas",Font.BOLD,20));
+        textField.setForeground(Color.BLACK);
+        textField.setText("username");
 
-        ImageIcon icon = new ImageIcon("cat.png");
-        button.setIcon(icon);
-        button.setIconTextGap(10);
-
-
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setLayout(null);
-        this.setSize(1000,1000);
-        this.setResizable(false);
-        this.setVisible(true);
         this.add(button);
-        this.add(dreamLabel);
+        this.add(textField);
+        this.setSize(500,500);
+        this.setVisible(true);
+        // pack() method sizes the frame so that all its contents are at or above their preferred sizes.
+        this.pack();
     }
     @Override
-    // this method is called when the button is clicked
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==button){
-            dreamLabel.setVisible(true);
+            System.out.println("hello "+textField.getText());
+            button.setEnabled(false);
+            textField.setEditable(false);
         }
     }
 }
