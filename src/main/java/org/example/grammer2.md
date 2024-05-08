@@ -317,7 +317,7 @@ public class Main {
     Border border = BorderFactory.createLineBorder(Color.pink,3);// create a border
     label.setBorder(border);// set the border of the label
 
-    label.setText("Jennie likes cat very much");
+    label.setText("Jennie likes cats very much");
     label.setHorizontalTextPosition(JLabel.CENTER); // set text LEFT, CENTER, RIGHT of image icon
     label.setVerticalTextPosition(JLabel.TOP); // set text TOP, CENTER, BOTTOM of image icon
 
