@@ -303,7 +303,9 @@ public class Main {
 }
 ```
 
-## 50. JLabel
+## 50. JLabel / 51. JPanel
+* JLabel: a display area for a short text string or an image, or both
+* JPanel: a generic lightweight container that hold other components like buttons, labels, and text fields
 ```java
 import java.awt.*;
 import javax.swing.*;
@@ -338,6 +340,12 @@ public class Main {
     frame.setVisible(true);
     frame.add(label); // add label to frame
     frame.pack(); // set size to fit all components
+    
+    JPanel panel = new JPanel();
+    panel.setBackground(Color.pink);
+    panel.setLayout(new BorderLayout());
+    panel.add(label);
   }
 }
 ```
+
