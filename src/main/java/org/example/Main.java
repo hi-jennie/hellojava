@@ -19,25 +19,37 @@ import javax.swing.event.AncestorListener;
 
 public class Main {
     public static void main(String[] args) {
-        JFrame frame = new JFrame();
-        frame.setVisible(true);
-        frame.setSize(500,500);
-        // set the layout of the frame in a 3x3 grid
-        // the last two parameters are the horizontal and vertical gaps between the buttons
-        frame.setLayout(new GridLayout(3,3,10,10));
+        JLabel label1 = new JLabel();
+        label1.setBounds(0,0,200,200);
+        label1.setOpaque(true);
+        label1.setBackground(Color.pink);
 
-        frame.add(new Button("0"));
-        frame.add(new Button("1"));
-        frame.add(new Button("2"));
-        frame.add(new Button("3"));
-        frame.add(new Button("4"));
-        frame.add(new Button("5"));
-        frame.add(new Button("6"));
-        frame.add(new Button("7"));
-        frame.add(new Button("8"));
-        frame.add(new Button("9"));
-        frame.add(new Button("10"));
-        // if there are more than 9 buttons, the layout will automatically add a new column
+        JLabel label2 = new JLabel();
+        label2.setBounds(50,50,200,200);
+        label2.setOpaque(true);
+        label2.setBackground(Color.blue);
+
+        JLabel label3 = new JLabel();
+        label3.setBounds(100,100,200,200);
+        label3.setOpaque(true);
+        label3.setBackground(Color.cyan);
+
+        JLayeredPane layeredPane = new JLayeredPane();
+        layeredPane.setBounds(0,0,500,500);
+        // we can add the labels to different layers by setting the integer value of the specific layer
+        layeredPane.add(label1, Integer.valueOf(0));
+        layeredPane.add(label2, Integer.valueOf(1));
+        layeredPane.add(label3, Integer.valueOf(2));
+
+        // important step pass the layeredPane to the frame
+        JFrame frame = new JFrame("JLayeredPane");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setSize(new Dimension(1000,1000));
+        frame.add(layeredPane);
+        // if we don't set the layout of the frame to null,
+        // then we need to set bounds for the layeredPane manually
+        frame.setLayout(null);
     }
 }
 

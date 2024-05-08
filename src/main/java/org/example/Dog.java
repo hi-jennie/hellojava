@@ -6,7 +6,8 @@ package org.example;
  * @单据标识
  * @date 2024/5/7 15:47
  **/
-public class Dog extends Animal{ @Override
+public class Dog extends Animal{
+    @Override
     void speak(){
         System.out.println("This dog is bark");
     }
