@@ -458,4 +458,28 @@ public class Main {
     }
 }
 ```
+## 54. FlowLayout
+* place components in a row, sized at their preferred size
+* if the horizontal space in the container is too small to put all the components in one row, the FlowLayout class uses multiple rows
+```java
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setVisible(true);
+        frame.setSize(500,500);
+        // 设置了组件之间的水平和垂直间距为 10，以及组件的对齐方式为居中对齐
+        frame.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
 
+        frame.add(new Button("0"));
+        frame.add(new Button("1"));
+        frame.add(new Button("2"));
+        frame.add(new Button("3"));
+        frame.add(new Button("4"));
+        frame.add(new Button("5"));
+        frame.add(new Button("6"));
+        frame.add(new Button("7"));
+        frame.add(new Button("8"));
+        frame.add(new Button("9"));
+    }
+}
+```
