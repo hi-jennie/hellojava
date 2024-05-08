@@ -551,3 +551,56 @@ public class Main {
     }
 }
 ```
+## 57.open a new GUI window
+```java
+public class Homepage extends JFrame implements ActionListener {
+    JFrame frame = new JFrame();
+    JButton button =  new JButton("click to see your cats");
+
+    Homepage(){
+        button.setBounds(150,150,200,100);
+        button.setFocusable(false);
+        button.addActionListener((ActionListener)this);
+        button.setOpaque(true);
+
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(500,500);
+        frame.setVisible(true);
+        frame.setLayout(null);
+        frame.add(button);
+    }
+    // this method is called when the button is clicked and it will open a new GUI window
+    @Override
+    public void actionPerformed(ActionEvent e){
+        if (e.getSource() == button){
+            frame.dispose();
+            FamilyMember familyMember = new FamilyMember();
+        }
+    }
+}
+public class FamilyMember {
+  JFrame frame = new JFrame();
+  FamilyMember(){
+    JLabel label1 =  new JLabel();
+    ImageIcon icon1 = new ImageIcon("cat.png");
+    label1.setSize(1000,1000);
+    label1.setIcon(icon1);
+    label1.setText("Turkey");
+    label1.setHorizontalAlignment(JLabel.CENTER);
+    label1.setHorizontalTextPosition(JLabel.CENTER);
+    label1.setVerticalTextPosition(JLabel.TOP);
+    label1.setIconTextGap(20);
+
+    frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    frame.setSize(500,500);
+    frame.setVisible(true);
+    frame.setLayout(new GridLayout());
+    frame.add(label1);
+  }
+}
+public class Main {
+  public static void main(String[] args) {
+    Homepage homepage = new Homepage();
+  }
+}
+```
