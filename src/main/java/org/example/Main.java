@@ -22,8 +22,9 @@ public class Main {
         JFrame frame = new JFrame();
         frame.setVisible(true);
         frame.setSize(500,500);
-        // 设置了组件之间的水平和垂直间距为 10，以及组件的对齐方式为居中对齐
-        frame.setLayout(new FlowLayout(FlowLayout.CENTER,10,10));
+        // set the layout of the frame in a 3x3 grid
+        // the last two parameters are the horizontal and vertical gaps between the buttons
+        frame.setLayout(new GridLayout(3,3,10,10));
 
         frame.add(new Button("0"));
         frame.add(new Button("1"));
@@ -35,6 +36,8 @@ public class Main {
         frame.add(new Button("7"));
         frame.add(new Button("8"));
         frame.add(new Button("9"));
+        frame.add(new Button("10"));
+        // if there are more than 9 buttons, the layout will automatically add a new column
     }
 }
 

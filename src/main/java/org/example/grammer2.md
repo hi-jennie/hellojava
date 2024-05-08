@@ -483,3 +483,31 @@ public class Main {
     }
 }
 ```
+## 55.GridLayout
+* places components in a grid of cells
+* each component takes all the available space within its cell, and each cell is the same size
+```java
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setVisible(true);
+        frame.setSize(500,500);
+        // set the layout of the frame in a 3x3 grid
+        // the last two parameters are the horizontal and vertical gaps between the buttons
+        frame.setLayout(new GridLayout(3,3,10,10));
+
+        frame.add(new Button("0"));
+        frame.add(new Button("1"));
+        frame.add(new Button("2"));
+        frame.add(new Button("3"));
+        frame.add(new Button("4"));
+        frame.add(new Button("5"));
+        frame.add(new Button("6"));
+        frame.add(new Button("7"));
+        frame.add(new Button("8"));
+        frame.add(new Button("9"));
+        frame.add(new Button("10"));
+        // if there are more than 9 buttons, the layout will automatically add a new column
+    }
+}
+```
