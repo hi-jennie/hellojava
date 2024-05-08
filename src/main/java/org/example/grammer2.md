@@ -415,3 +415,47 @@ public class Main {
 }
 ```
 
+## 53.BorderLayout
+* BorderLayout divides the container into five regions: North, South, East, West, and Center
+* we can also add a sub-panel to each region,it's like a container in a container
+```java
+import java.awt.*;
+import javax.swing.*;
+public class Main {
+    public static void main(String[] args) {
+        JFrame frame = new JFrame();
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(1000,1000);
+        // 这意味着组件之间的水平和垂直间距都是 10 像素。 
+        frame.setLayout(new BorderLayout(10,10));
+        frame.setVisible(true);
+
+        JPanel panel1 = new JPanel();
+        JPanel panel2 = new JPanel();
+        JPanel panel3 = new JPanel();
+        JPanel panel4 = new JPanel();
+        JPanel panel5 = new JPanel();
+
+        panel1.setBackground(Color.pink);
+        panel2.setBackground(Color.green);
+        panel3.setBackground(Color.blue);
+        panel4.setBackground(Color.yellow);
+        panel5.setBackground(Color.orange);
+
+        panel1.setPreferredSize(new Dimension(100,100));
+        panel2.setPreferredSize(new Dimension(100,100));
+        panel3.setPreferredSize(new Dimension(100,100));
+        panel4.setPreferredSize(new Dimension(100,100));
+        panel5.setPreferredSize(new Dimension(100,100));
+        
+        // BorderLayout 布局管理器将尝试将组件放置在容器的边界区域，并尽可能地接近组件的首选大小。 
+        //因此，靠近边界的一侧的距离是固定的，这是由 BorderLayout 布局管理器和组件的首选大小共同决定的。
+        frame.add(panel1,BorderLayout.NORTH);
+        frame.add(panel2,BorderLayout.WEST);
+        frame.add(panel3,BorderLayout.CENTER);
+        frame.add(panel4,BorderLayout.EAST);
+        frame.add(panel5,BorderLayout.SOUTH);
+    }
+}
+```
+
