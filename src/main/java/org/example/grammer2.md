@@ -720,3 +720,53 @@ public class MyFrame extends JFrame implements ActionListener {
     }
 }
 ```
+
+## 61.JRadioButton
+* a radio button is a UI component that allows the user to choose only one option from a predefined set of options
+```java
+public class MyFrame extends JFrame implements ActionListener {
+    JRadioButton pizzaButton;
+    JRadioButton hamburgerButton;
+    JRadioButton hotDogButton;
+
+    MyFrame(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+
+        pizzaButton = new JRadioButton("pizzaButton");
+        hamburgerButton = new JRadioButton("hamburgerButton");
+        hotDogButton = new JRadioButton("hotDogButton");
+
+        // add these buttons to a group so that only one can be selected at a time
+        ButtonGroup group = new ButtonGroup();
+        group.add(pizzaButton);
+        group.add(hamburgerButton);
+        group.add(hotDogButton);
+
+        pizzaButton.addActionListener((ActionListener) this);
+        hamburgerButton.addActionListener((ActionListener) this);
+        hotDogButton.addActionListener((ActionListener) this);
+
+        this.add(pizzaButton);
+        this.add(hamburgerButton);
+        this.add(hotDogButton);
+        this.setVisible(true);
+        // pack() method sizes the frame so that all its contents are at or above their preferred sizes.
+        this.pack();
+    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource()==pizzaButton){
+            System.out.println("you ordered pizzaButton");
+        }
+        else if(e.getSource()==hamburgerButton){
+            System.out.println("you ordered hamburger");
+        }
+        else if(e.getSource()==hotDogButton){
+            System.out.println("you ordered hotDog");
+        }
+    }
+}
+```
+
+

@@ -5,41 +5,44 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class MyFrame extends JFrame implements ActionListener {
-    JButton button;
-    JCheckBox checkBox;
+    JComboBox comboBox;
+
     MyFrame(){
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLayout(new FlowLayout());
 
-        button = new JButton();
-        button.setText("submit");
-        button.addActionListener((ActionListener) this); // add action listener
+        String[] family = {"Jennie","Rustin","white","Turkey"};
+        comboBox = new JComboBox(family);
+        comboBox.addActionListener((ActionListener)this);
 
-        ImageIcon icon = new ImageIcon("cat.png");
-        ImageIcon checkIcon = new ImageIcon("dream.png");
+        // there are some relative method about comboBox
+        // setEditable(true) will allow user to input their own value
+        comboBox.setEditable(true);
+        // get the number of items in the comboBox
+        comboBox.getItemCount();
+        // add an item to the comboBox
+        comboBox.addItem("horse");
+        comboBox.insertItemAt("rabbit",0);
+        // set the selected item by the value
+        comboBox.setSelectedItem("horse");
+        // set the selected item by the index
+        comboBox.setSelectedIndex(5);
 
-        checkBox = new JCheckBox();
-        checkBox.setText("I'm not a rabbit");
-        // remove the focus from the checkbox
-        checkBox.setFocusable(false);
-        checkBox.setFont(new Font("Consolas",Font.PLAIN,25));
-        // set icon when not selected
-        checkBox.setIcon(icon);
-        // set icon when selected
-        checkBox.setSelectedIcon(checkIcon);
+        comboBox.removeItem("horse");
+        comboBox.removeItemAt(0);
+        // comboBox.removeAll();
 
-        this.add(button);
-        this.add(checkBox);
-        this.setSize(500,500);
+        this.add(comboBox);
         this.setVisible(true);
-        // pack() method sizes the frame so that all its contents are at or above their preferred sizes.
         this.pack();
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource()==button){
-            // .isSelected() returns a boolean value
-            System.out.println(checkBox.isSelected());
+        if(e.getSource()==comboBox){
+            // get the selected item and index
+            System.out.println(comboBox.getSelectedItem());
+            System.out.println(comboBox.getSelectedIndex());
         }
+
     }
 }
