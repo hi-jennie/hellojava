@@ -816,6 +816,7 @@ public class MyFrame extends JFrame implements ActionListener {
 
 ```
 ## 63.slider
+* a GUI component that lets the user select a value from a range of values
 ```java
 public class SliderDemo implements ChangeListener {
     JFrame frame;
@@ -828,7 +829,7 @@ public class SliderDemo implements ChangeListener {
         label = new JLabel();
         label.setFont(new Font("MV Boli",Font.PLAIN,25));
 
-        //
+        // create a slider with a range from 0 to 100 and a starting value of 50
         slider = new JSlider(0,100,50);
         slider.addChangeListener(this);
 
@@ -862,4 +863,49 @@ public class SliderDemo implements ChangeListener {
     }
 }
 ```
+
+## 64.progress bar
+* 为什么颜色设置不起效果
+```java
+public class ProgressBarDemo {
+    JFrame frame = new JFrame();
+    JProgressBar bar = new JProgressBar();
+
+    ProgressBarDemo(){
+        bar.setValue(0);
+        bar.setBounds(0,0,420,300);
+        // set the string to be displayed
+        bar.setStringPainted(true);
+        bar.setFont(new Font("MV Boli",Font.BOLD,25));
+        bar.setForeground(Color.red);
+        bar.setBackground(Color.pink);
+
+        frame.add(bar);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setLayout(null);
+        frame.setSize(420,420);
+        frame.setVisible(true);
+
+        fill();
+    }
+    public void fill(){
+        int counter = 0;
+        while(counter<=100){
+            bar.setValue(counter);
+            // set the bar to sleep for 100 milliseconds
+            try{
+                Thread.sleep(100);
+            }
+            // catch the exception when the thread is interrupted
+            catch (InterruptedException e){
+                e.printStackTrace();
+            }
+            counter +=1;
+        }
+        // set the string to be displayed when the progress bar is full
+        bar.setString("Done!!!");
+    }
+}
+```
+
 
