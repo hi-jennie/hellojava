@@ -1010,3 +1010,43 @@ public class SelectFile extends JFrame implements ActionListener {
 }
 ```
 
+## 67.ColorChooser
+* a GUI component that allows the user to select a color from a color palette
+```java
+public class ColorChooser extends JFrame implements ActionListener {
+    JButton button;
+    JLabel label;
+    ColorChooser(){
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLayout(new FlowLayout());
+
+        button = new JButton("select a color");
+        button.addActionListener(this);
+        label = new JLabel();
+        label.setText("the current color");
+        label.setFont(new Font("MV Boli",Font.PLAIN,15));
+        label.setForeground(Color.PINK);
+        // if we want to change the background color of the label, we need to setOpaque(true)
+        // or else the background color will not be displayed
+        label.setOpaque(true);
+        label.setBackground(Color.BLACK);
+
+        this.add(button);
+        this.add(label);
+        this.pack();
+        this.setVisible(true);
+    }
+    public void actionPerformed(ActionEvent e){
+        if(e.getSource() == button){
+            // create a color chooser
+            JColorChooser colorChooser = new JColorChooser();
+            // Color.pink is the default color of the color chooser
+            // save the selected color in a variable
+            Color color = JColorChooser.showDialog(null,"Pick a color",Color.pink);
+            label.setForeground(color);
+        }
+    }
+
+}
+```
+
