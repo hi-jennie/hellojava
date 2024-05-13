@@ -1,16 +1,33 @@
 package org.example;
 
+import java.util.Random;
+
+//模拟彩票中奖号码
 public class Main {
+
     public static void main(String[] args) {
-        int[] arr = {1, 2, 3, 4, 5};
-        for (int i = 0, j = arr.length - 1; i < j; i++, j--) {
-            int temp = arr[i];
-            arr[i] = arr[j];
-            arr[j] = temp;
+        // generate a random number between 1 and 33
+
+    }
+    public static int[] redBall() {
+        Random random = new Random(33);
+        int[] red = new int[6];
+        for (int i = 0; i < 6; i++) {
+            red[i] = random.nextInt() + 1;
+            if (i > 0) {
+                for (int j = 0; j < i; j++) {
+                    if (red[i] == red[j]) {
+                        i--;
+                        break;
+                    }
+                }
+            }
         }
-        for (int i : arr) {
-            System.out.println(i);
-        }
+        return red;
+    }
+    public static int blueBall() {
+        Random random = new Random(16);
+        return random.nextInt() + 1;
     }
 }
 

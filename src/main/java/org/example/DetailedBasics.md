@@ -166,3 +166,162 @@ public class Main {
   }
 }
 ```
+## 8.stack(栈) and heap(堆)
+* stack: store the local variables and method calls.
+* heap: store the objects and the reference variables.——use `new` to create objects.
+```java
+// stack
+int a = 10;
+int b = 20;
+int c = a + b;
+// heap
+int[] arr = new int[5];
+```
+
+## 9. overload
+* overload: the subclass has the same method as the superclass.
+* 参数不同：类型不同，**顺序不同**，个数不同都会被认为是方法重载。
+
+## 10.primitive type and reference type as method parameters
+* primitive type: pass by value
+* reference type: pass by reference
+```java
+public class Main {
+    public static void main(String[] args) {
+        int a = 10;
+        int b = 20;
+        swap(a, b);
+        System.out.println("a: " + a + ", b: " + b); // a: 10, b: 20
+
+        int[] arr = {1, 2, 3, 4, 5};
+        change(arr);
+        for (int i : arr) {
+            System.out.println(i); // 10, 2, 3, 4, 5
+        }
+    }
+
+    public static void swap(int a, int b) {
+        int temp = a;
+        a = b;
+        b = temp;
+    }
+    // change the element of the array
+    // arr was passed by reference
+    public static void change(int[] arr) {
+        arr[0] = 10;
+    }
+}
+```
+## 11.2D array
+* 2D array: an array of arrays.
+* format: `type[][] arr = new type[row][col];——动态初始化`
+* format: `type[][] arr = new type[row][];——动态一维初始化`
+* format: `type[][] arr = new type[][]{{value1, value2, value3}, {value4, value5, value6}};——静态初始化`
+```java
+int[][] arr = new int[3][4];
+int[][] arr2 = new int[][]{{1, 2, 3}, {4, 5, 6}};
+int[][] arr3 = {
+        {1, 2, 3}, 
+        {4, 5, 6}
+};
+// get the length of the 2D array
+int row = arr3.length;
+int col = arr3[0].length;
+// access the element of the 2D array
+int a = arr3[0][0];
+// change the element of the 2D array
+arr3[0][0] = 10;
+```
+## 12.private
+* private: only the class itself can access the private members——to protect the data from being modified by other classes
+* getter and setter: use getter and setter to access the private members.
+* advantage of private: encapsulation.(封装：隐藏对象的属性和实现细节，仅对外提供公共访问方式)
+* setter(parameters): set the value of the private member
+* getter(): get the value of the private member
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person();
+        person.setName("Tom");
+        // person.name = "Tom"; // error
+        // we can't access the private member directly by person.name ;
+        System.out.println(person.getName());
+    }
+}
+public class Person {
+    private String name;
+    public String getName() {
+        return name;
+    }
+    public void setName(String name) {
+        this.name = name;
+    }
+    public String getName() {
+        return name;
+    }
+}
+```
+## 13.constructor
+* 创造对象的时候，虚拟机会自动调用构造方法/constructor，作用是给成员变量初始化的
+* if we don't define a constructor, the compiler will generate a default constructor.
+* if we define a constructor, the compiler will not generate a default constructor.
+* overload:has the same name but different parameters.在任何时候，最好是写上空参和带全部参数的构造方法/constructor
+```java
+public class Main {
+    public static void main(String[] args) {
+        Person person = new Person("Tom", 20);
+        System.out.println(person.getName());
+        System.out.println(person.getAge());
+    }
+}
+public class Person {
+    private String name;
+    private int age;
+    // constructor overloading-without parameters
+    public Person() {
+        
+    }
+    // constructor overloading-with parameters
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+}
+```
+## 14.标准的javaBean类
+* 成员变量使用private修饰
+* 提供至少两个构造方法
+  * 无参构造方法
+  * 带全部参数构造方法
+  
+* 成员方法
+  * 提供每一个成员变量对应的set和get方法（alt+insert）快捷键/装PTG插件
+
+
+## 15.一个对象中的内存图
+seven steps：
+* 加载class文件到方法区
+* 声明局部变量
+* 在堆内寸中开辟新空间
+* 默认初始化
+* 显示初始化
+* 构造方法初始化（有参数的构造方法）
+* 将堆内存地址赋值给局部变量
+```java
+Student student = new Student();
+
+```
+primitive data type:
+  * 数据值是存储在自己的空间
+  * 复制给其他变量，也是赋的真实的值
+```java
+int a = 10;
+int b = a; // b = 10
+```
+reference data type:
+  * 数据值是存储在堆内存中
+  * 复制给其他变量，赋的是地址值
+```java
+Student student = new Student();
+Student student2 = student; // student2 = student
+```
