@@ -12,10 +12,62 @@ public class Main {
         students[0] = student1;
         students[1] = student2;
         students[2] = student3;
-        
-        // add a new student and check if the student is already exist
-        // if the student is already exist, print "this student is already exist"
-        // if the student is not exist, add the student to the array
+
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            System.out.println("**add**, **delete**, **display**,**quit**");
+            String choice = scanner.next();
+
+            if(choice.equals("add")){
+                addStudent();
+            }
+            if(choice.equals("delete")){
+                deleteStudent1();
+            }
+            if(choice.equals("display")){
+                for(StudentInfo i : students){
+                    System.out.println(i.getId()+" "+i.getName()+" "+i.getAge());
+                }
+            }
+            if(choice.equals("quit")){
+                break;
+            }
+        }
+
+
+    }
+
+    public static boolean contains(StudentInfo[] array, int id){
+        for(int i = 0;i<array.length;i++){
+            int stdID = array[i].getId();
+            if(stdID == id){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    public static void createNewArray(StudentInfo[] array){
+        StudentInfo[] newStudents = new StudentInfo[array.length+1];
+        for(int i = 0;i < array.length;i++){
+            newStudents[i] = array[i];
+        }
+        students = newStudents;
+    }
+
+
+    public static int count(StudentInfo[] array){
+        int count = 0;
+        for (StudentInfo i : array){
+            if(i != null){
+                count++;
+            }
+        }
+        return count;
+
+    }
+
+    public static void addStudent(){
         while(true){
             Scanner scanner = new Scanner(System.in);
             System.out.println("enter student ID");
@@ -39,50 +91,91 @@ public class Main {
                     createNewArray(students);
                     students[existStudentNumber] = newStudent;
                 }
-
             }
-            // continue or quit
-            System.out.println("enter 0 or 1 : 0 represent continue, 1 represent to quit");
+
+            System.out.println("enter 0 or 1 to continue : 0 represent continue, 1 represent to quit");
             int command = scanner.nextInt();
             if(command==1){
                 break;
             }
         }
-        // print all students
-        for(StudentInfo i : students){
-            System.out.println(i.getId()+" "+i.getName()+" "+i.getAge());
-        }
+
     }
-    // check if the student is already exist
-    public static boolean contains(StudentInfo[] array, int id){
-        for(int i = 0;i<array.length;i++){
+    // input ID to get the index
+    public static int getIndex(StudentInfo[] array,int ID){
+        for(int i=0;i<array.length;i++){
             int stdID = array[i].getId();
-            if(stdID == id){
-                return true;
+            if(stdID==ID){
+                return i;
             }
         }
-        return false;
+        return -1;
     }
-    // count the number of students
-    public static int count(StudentInfo[] array){
-      int count = 0;
-      for (StudentInfo i : array){
-        if(i != null){
-          count++;
+    public static void deleteStudent1(){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            System.out.println("enter the student ID that you want to delete:");
+            int ID = scanner.nextInt();
+            boolean flag = contains(students,ID);
+            if(flag){
+                int index = getIndex(students,ID);
+                int newLength = students.length-1;
+                if(newLength>0){
+                    StudentInfo[] newStudents = new StudentInfo[newLength];
+                    // if
+                    int j = 0;
+                    for(int i = 0;i<students.length;i++){
+                        if(i != index){
+                            newStudents[j++] = students[i];
+                        }
+                    }
+                    students = newStudents;
+                }else{
+                    System.out.println("all students are deleted");
+                }
+            }else{
+                System.out.println("this student doesn't exist");
+            }
+            System.out.println("enter 0 or 1 to continue : 0 represent continue, 1 represent to quit");
+            int command = scanner.nextInt();
+            if(command==1){
+                break;
+            }
         }
-      }
-      return count;
-  
     }
-    // create a new array if the array is full
-    public static void createNewArray(StudentInfo[] array){
-        StudentInfo[] newStudents = new StudentInfo[array.length+1];
-        for(int i = 0;i < array.length;i++){
-            newStudents[i] = array[i];
+
+    public static void deleteStudent(){
+        Scanner scanner = new Scanner(System.in);
+        while(true){
+            System.out.println("enter the student ID that you want to delete:");
+            int ID = scanner.nextInt();
+            boolean flag = contains(students,ID);
+            if(flag){
+                int index = getIndex(students,ID);
+                int newLength = students.length-1;
+                if(newLength>0){
+                    StudentInfo[] newStudents = new StudentInfo[newLength];
+                    for(int i = 0;i<students.length;i++){
+                        if(students[i]!=students[index]){
+                            newStudents[i] = students[i];
+                        }
+                    }
+                    students = newStudents;
+                }else{
+                    System.out.println("all students are deleted");
+                }
+            }else{
+                System.out.println("this student doesn't exist");
+            }
+            System.out.println("enter 0 or 1 to continue : 0 represent continue, 1 represent to quit");
+            int command = scanner.nextInt();
+            if(command==1){
+                break;
+            }
         }
-        students = newStudents;
     }
-    
+
+
 
 }
 ```

@@ -332,4 +332,71 @@ Student student2 = student; // student2 = student
   * next(): get the next string
 
 * nextLine(): get the next line
+
+## 17.API(学会使用API帮助文档)
+* API: Application Programming Interface
+
+## 18.String
+* Java程序中的所有的字符串文字，都被看作是String类的实例/对象
+* String类是final类，不能被继承
+* String类是不可变的，一旦创建，不能被修改
 ```java
+// 是省略了new关键字的写法
+// 直接赋值时，会在字符串常量池（stringtable存在于堆内存中）中创建一个字符串对象，如果字符串常量池中已经存在该字符串，则直接返回该字符串的引用
+String str = "hello";
+// 也可以使用new关键字
+String str2 = new String();
+String str2 = new String("hello");
+// 字符串的拼接
+String str3 = "hello" + "world";
+// 将字符数组转换为字符串
+char[] arr = {'a', 'b', 'c'};
+String str4 = new String(arr);// abc
+// 将字节数组转换为字符串
+byte[] arr2 = {97, 98, 99};// 转换对应的ASCII码
+String str5 = new String(arr2);// abc
+```
+```java
+// 字符串的比较
+String str1 = "hello";
+String str2 = "hello";
+String str3 = "Hello";
+System.out.println(str1 == str2); // true
+System.out.println(str1 == str3); // false
+System.out.println(str1.equals(str3)); 
+System.out.println(str1.equalsIgnoreCase(str3)); // true
+```
+```java
+// new关键字创建的字符串对象，会在堆内存中开辟新空间
+String str4 = new String("hello");
+String str5 = new String("hello");
+System.out.println(str4 == str5);
+// false,因为new关键字创建的字符串对象，会在堆内存中开辟新空间，所以比较的是·地址值
+```
+```java
+// how to iterate the string
+String str = "hello";
+for (int i = 0; i < str.length(); i++) {
+    System.out.println(str.charAt(i));
+}
+```
+```java
+// how to count the number of a character in a string
+String str = "hellisgfwieu0826491USGuwDGuw";
+int uppercaseCount = 0;
+int lowercaseCount = 0;
+int digitCount = 0;
+for (int i = 0; i < str.length(); i++) {
+    char c = str.charAt(i);
+    // char 类型的变量在参与计算时，会自动转换为ASCII码
+    if(c >= 'A' && c <= 'Z'){
+        uppercaseCount++}
+    else if(c >= 'a' && c <= 'z'){
+        lowercaseCount++;
+    }
+    // 所以即使是数字本身也是跟0-9的ASCII码进行比较
+    else if(c >= '0' && c <= '9'){
+        digitCount++;
+    }
+}
+```
