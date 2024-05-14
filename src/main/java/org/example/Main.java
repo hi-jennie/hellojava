@@ -1,27 +1,18 @@
 package org.example;
 
 
+import java.util.Scanner;
+
 public class Main {
     public static void main(String[] args) {
-    int[] array = {1,2,3,4};
-    System.out.println(arrToString(array));;
-
-    }
-    public static String arrToString(int[] arr) {
-        if (arr == null) {
-            return "";
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("enter a string");
+        String str = scanner.next();
+        int len = str.length();
+        String reverseStr = "";
+        for(int i=len-1;i>=0;i--){
+            reverseStr = reverseStr+str.charAt(i);
         }
-        if (arr.length == 0) {
-            return "[]";
-        }
-        String result = "[";
-        for(int i=0;i<arr.length;i++){
-            if(i==arr.length-1){
-                result = result+arr[i];
-            }else {
-                result = result+arr[i]+",";
-            }
-        }
-        return result+"]";
+        System.out.println(reverseStr);
     }
 }
