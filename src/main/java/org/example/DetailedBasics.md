@@ -325,3 +325,11 @@ reference data type:
 Student student = new Student();
 Student student2 = student; // student2 = student
 ```
+## 16.scanner
+* the next three methods :when there are whitespace,tabs,or enter, the method will stop reading the input.
+  * nextInt(): get the next integer
+  * nextDouble(): get the next double
+  * next(): get the next string
+
+* nextLine(): get the next line
+```java
