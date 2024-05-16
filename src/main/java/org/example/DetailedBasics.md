@@ -445,45 +445,67 @@ public class Main {
     }
 }
 ```
-学会使用查表法嗷
 ```java
-public class Main {
-    String str;
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
-        System.out.println("enter an int:");
-        String str = scanner.next();
-        String originalString = addZero(toUppercase(str));
-        System.out.println(originalString);
-        String[] unit = {"佰","拾","万","仟","佰","拾","元"};
-        String finalString = "";
-
-        for (int i = 0; i < 7; i++) {
-            finalString = finalString+originalString.charAt(i)+unit[i];
-
-        }
-        System.out.println(finalString);
-    }
-
-    public static String toUppercase(String str){
-        // 学会使用查表法，即将数字跟表产生一个一一对应的关系
-        String[] uppercase = {"零","壹","贰","叁","肆","伍","陆","柒","捌","玖",};
-        String result = "";
-        for(int i=0;i<str.length();i++){
-            // main step
-            // 这行代码首先使用charAt方法获取字符串中的第i个字符，然后通过减去字符'0'的ASCII值，将字符型的数字转换为整数。
-            // 字符'2'的ASCII值是50，字符'0'的ASCII值是48，所以'2'-'0'的结果就是2，这就实现了字符到整数的转换
-            int number = str.charAt(i)-'0';
-            result = result+uppercase[number];
-        }
-        return result;
-    }
-    public static String addZero(String str){
-        int count = 7-str.length();
-        for (int i = 0; i < count; i++) {
-            str = "零"+str;
-        }
-        return str;
-    }
-}
+// subString
+String phoneNum = "12345678901";
+String subPhoneNum = phoneNum.substring(3, 7);// 3 is included, 7 is not included
+System.out.println(subPhoneNum); // 4567
+phoneNum.substring(3);// 3 is included, the rest of the string
 ```
+```java
+// replace
+String str = "hello";
+String newStr = str.replace('l', 'w');
+System.out.println(newStr); // hewwo
+```
+```java
+// StringBuilder——create a mutable string
+// method: append, insert, delete, reverse
+// 应用场景：字符串的拼接与反转
+StringBuilder sb = new StringBuilder();
+sb.append("hello");
+sb.append("world");
+sb.toString();
+sb.insert(5, " ");
+sb.delete(5, 6);
+sb.reverse();
+```
+```java
+// SrringJoiner
+// join the elements of the array with a delimiter
+String[] arr = {"hello", "world", "java"};
+// StringJoiner(",") represent how to join the elements
+StringJoiner sj = new StringJoiner(",");
+for (String s : arr) {
+    sj.add(s);
+}
+// represent the length of the StringJoiner
+int len = sj.length();
+// convert a StringJoiner object to a string
+System.out.println(sj.toString()); // hello,world,java
+```
+字符串拼接基本原理：
+* 如果没有变量参与运算，编译器会直接将字符串拼接成一个字符串（触发常量优化机制），直接复用字符串常量池中的字符串
+* 如果有变量参与运算，编译器会使用StringBuilder进行拼接，最后调用toString()方法生成一个新的字符串对象，所以每次相加都会创建一个新的对象，浪费内存
+* 因此，对于字符串拼接，可以自己主动去使用StringBuilder进行拼接，减少内存的浪费
+* 默认情况下，StringBuilder的初始容量是16，如果超过了16，会自动扩容，扩容的方式是原来的容量*2+2
+```java
+// StringBuider
+String str = "hello";
+// 系统会先将"hello"和"world"拼接成一个新的字符串对象，然后赋值给str2
+String str2 = "hello"+"world";
+str.toCharArry();// 将一个字符串变成一个字符数组
+// 系统会自动创建一个StringBuilder对象，然后调用append方法进行拼接，最后调用toString方法生成一个新的字符串对象
+String str3 = str+"world";
+System.out.println(str2 == str3);// false
+
+StringBuilder sb = new StringBuilder();
+sb.append("hello");
+sb.append("world");
+str = sb.toString();
+```
+how to change a fixed String 
+* substring
+* convert to char array
+
+
