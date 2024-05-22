@@ -9,6 +9,7 @@ package pet;
 public class Test {
     public static void main(String[] args) {
         Keeper keeper = new Keeper("Jennie",24);
+        // polymorphism
         Animal cat = new Cat("black",2);
         keeper.myPet(cat,"cat food");
 
