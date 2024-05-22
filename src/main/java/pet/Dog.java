@@ -6,7 +6,7 @@ package pet;
  * @单据标识
  * @date 2024/5/22 15:35
  **/
-public class Dog extends Animal{
+public class Dog extends Animal implements Swim{
     public Dog(){
 
     }
@@ -21,5 +21,10 @@ public class Dog extends Animal{
 
     public void watchHome(){
         System.out.println("this dog is able to watch home");
+    }
+
+    @Override
+    public void swim(){
+        System.out.println("this dog is able to swim");
     }
 }

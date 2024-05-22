@@ -6,7 +6,7 @@ package pet;
  * @单据标识
  * @date 2024/5/22 15:26
  **/
-public class Keeper {
+public class Keeper implements Swim{
     private String name;
     private int age;
 
@@ -18,5 +18,10 @@ public class Keeper {
     public void myPet(Animal animal,String food){
         System.out.println(this.name+" is "+this.age+" years old");
         animal.eat(food);
+    }
+
+    @Override
+    public void swim(){
+        System.out.println("this keeper is able to swim");
     }
 }

@@ -13,5 +13,9 @@ public class Test {
         Animal cat = new Cat("black",2);
         keeper.myPet(cat,"cat food");
 
+        Dog dog = new Dog("white",3);
+        keeper.swim();
+        dog.swim();
+
     }
 }

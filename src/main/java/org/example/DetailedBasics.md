@@ -610,7 +610,7 @@ public class Student extends person{
     }
 }
 ```
-* 多态：同类型的对象，表现出的不同形态
+* polymorphism：同类型的对象，表现出的不同形态
   * 父类类型 对象名称 = 子类对象
   * 有继承关系，有父类引用指向子类对象，有方法重写
   * 使用父类型作为参数，可以接收所有子类对象
@@ -672,3 +672,34 @@ public class Main {
       }
   }
 ```
+
+## 22. package
+* situations that no need to import:
+  * the class is in the same package
+  * the class is in the java.lang package
+* if the two different packages have the same class name, we need to use the full class name to avoid ambiguity.
+* principle of package:
+  * package name is in lowercase
+  * the domain name is reversed
+  
+## 23.final
+* class: cannot be inherited 
+* method: cannot be overridden (stand for a principle that cannot be changed)
+* **variable**: cannot be modified and can be assigned a value only once
+   * how to name a final variable: **all uppercase** and use `_` to separate the words
+   * if a final variable is a reference type, **the reference cannot be changed, but the content of the reference can be changed.**
+   * if a final variable is a primitive type, the value cannot be changed.
+
+## 24. abstract
+* abstract class: a class that contains abstract method **(it can't be instantiated)**
+  * **(it can't be instantiated)**
+  * it can have **constructors** because when the subclass is instantiated, the constructor of the superclass will be called.
+  * the subclass of an abstract class must **override** **all the abstract methods** of the superclass
+* abstract method: a method that has no implementation
+
+## 25. interface
+* can't be instantiated
+* all the methods in the interface are abstract methods
+* all the variables in the interface are final variables
+
+
