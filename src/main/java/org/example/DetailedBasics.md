@@ -508,4 +508,167 @@ how to change a fixed String
 * substring
 * convert to char array
 
+## 19.ArrayList(集合)(add,delete,set,get)
+* ArrayList: a dynamic array that can store **multiple** elements.（动态数组）
+* it can expand or shrink automatically but the length of the array is fixed after it is created.
+* unable to store primitive data type, only reference data type.(convert int->Integer,char->Character)
+```java
+// create an ArrayList
+// <Integer> represents the type of the ArrayList,it's not int
+ArrayList<String> list = new ArrayList<>();
+System.println(list);// []
+// add 
+list.add("1");
+list.add("2");
+list.add("3");
+// get 
+int a = list.get(0);
+// set
+list.set(0, 10);// set the element of the ArrayList
+// delete 
+list.remove("1");// return boolean
+list.remove(0);// return the element that is deleted
 
+// get the size of the ArrayList(not length())
+int size = list.size();// 2
+
+// iterate the ArrayList
+for (int i = 0; i < list.size(); i++) {
+    System.out.println(list.get(i));
+}
+```
+
+## 20.static
+* 静态变量
+  * **静态变量是随着的类的加载而加载的，优先于对象出现**
+  * 被该类所有对象共享可以通过**类名**访问（也可以通过对象名调用）
+  * 不属于对象而是属于class
+* 静态方法
+  * 静态方法只能访问静态变量和静态方法，不能访问成员变量和成员方法
+  * 非静态方法可以访问所有（可以访问成员方法和成员变量和静态变量和静态方法）
+  * 没有this关键字：this表示当前调用对象的地址值（普通的成员方法是有this作为隐藏的参数的）
+  * 多用在测试类或者工具类：
+    * 工具类：帮助完成一些功能，但是不描述事物特征的类（例如Math class）
+    * 工具类类名要表达明确的功能
+      * 私有化构造方法——不让外界创建对象
+      * 方法定义为static
+  
+## 21.OOP——encapsulation
+*  encapsulation——封装为一个类：对象代表什么，就得封装相对应的数据（attribute），并提供数据对应的行为（method）
+*  继承：可以把subclass中的重复的代码抽取到superclass中，提高代码的复用性，同时增加其他的function，是subclass更强大
+  * 什么时候用继承：当类与类之间，存在相同共性的内容是，**并满足子类是父类的一种**，就可以考虑使用继承，来优化代码
+  * 一个子类只能继承一个父类，不能继承多个父类（只支持单继承，不支持多继承——子、父、间接父类）
+  * 所有类都继承与Object类
+  * 子类只能访问父类中的非私有的成员（public and protected）
+  * constructor不能被继承，子类只能自己写
+  * 不管私有还是非私有的成员变量，子类都能继承，但私有的不能直接使用
+  * 不是所有父类方法都能被继承，只有父类中的虚方法（非private，非static，非final）才能被继承
+  * @override方法的重写：当父类中的方法不能满足子类中需求是，需要进行方法重写。
+  * 重写的方法会覆盖方法表中继承下来的方法（覆盖和拓展）
+  * 子类重写父类方法时，访问权限必须大于父类且返回值类型必须小于等于父类
+
+```java
+public class Animal{
+    String name;
+    String enemy;
+}
+public class Cat extends Animal{
+  String name;
+  int age;
+}
+
+public class Main {
+  public static void main(String[] args) {
+      // 在加载Cat时，其父类也会被加载出来
+      Cat cat = new Cat();
+      // 赋值时采取就近原则，赋值给了cat的子类
+      cat.name = "turkey";
+      cat.age = 2;
+      // enemy 没有被private修饰所以可以直接用.调用
+      // 即使有private，能继承但无法使用和赋值，可以用getter和setter
+      cat.enemy = "human";
+  }
+```
+```java
+public class Student extends person{
+    public Student{
+        // 首先访问父类的constructor，因为可能会用到父类中的数据，是默认的
+        super();
+        // 然后再是子类自己独特的constructor
+    }
+    // 访问父类中的有参构造，通过子类传进去
+//    public Student(String args){
+//       super(String args); 
+    }
+    public Student(){
+    // 在本类内部调用有参构造，然后为其设了一个默认值
+      this(0,"sichuan university");
+    }
+    public Student(int age,String school){
+        this.age = age;
+        this.school = school;
+    }
+}
+```
+* 多态：同类型的对象，表现出的不同形态
+  * 父类类型 对象名称 = 子类对象
+  * 有继承关系，有父类引用指向子类对象，有方法重写
+  * 使用父类型作为参数，可以接收所有子类对象
+* 优势：
+  * 便于维护
+  * 接收不同子类的参数
+* 弊端：
+  * 不能调用子类的特有方法
+  * 解决方法：将父类转回子类
+  * Cat c = (cat)cat,然后再去调用子类方法就行了
+```java
+public class Animal{
+    String name = "animal";
+    public void info(){
+        sout("animal")
+    }
+}
+public class Cat extends Animal{
+    String name;
+    @Override
+    public void info(){
+      sout("cat")
+    }
+    public void catchMouse(){
+        sout("catch mouse")
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+       // 多态格式
+      // auto type conversion
+      Animal cat = new Cat();
+      // 调用成员变量
+      // 编译看左边：会首先看左边的父类时候是否有name这个变量，如果有，编译成功，否则失败
+      // 运行也看左边：运行代码时，实际获取的就是左边父类成员变量的值
+      sout(cat.name) // 打印animal
+      
+      // 调用成员方法
+      // 编译看左边：会首先看左边的父类时候是否info()这个方法，如果有，编译成功，否则失败
+      // 运行看右边：运行子类中的方法
+      // 所以，多态必须有方法重写
+      cat.info();// cat
+      // compulsory type conversion
+      Cat c = (cat)cat;
+      c.catchMouse();
+      // how to judge the type of the object
+      if(cat instanceof Cat){
+          Cat c = (Cat)cat;
+          c.catchMouse();
+      }else if (cat instanceof Dog){
+          Dog d = (Dog)cat;
+          d.watchHouse();
+      }
+      // another way to judge the type of the object
+      if(cat instanceof Cat c){
+          c.catchMouse();
+          // if the object is a Cat object, then assign the object to c
+      }
+  }
+```
