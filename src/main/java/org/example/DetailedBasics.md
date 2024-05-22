@@ -698,8 +698,50 @@ public class Main {
 * abstract method: a method that has no implementation
 
 ## 25. interface
-* can't be instantiated
-* all the methods in the interface are abstract methods
-* all the variables in the interface are final variables
+* can't be instantiated(**no constructor**)
+* all the **methods** in the interface are **abstract methods**(public abstract by default)
+* all the **variables** in the interface are **final variables**(public static final by default)
+```java
+public interface MyInterface {
+    // all the methods in the interface are abstract methods
+    void method1();
+    void method2();
+    void method3();
+    // all the variables in the interface are final variables
+    int NUM = 10;
+    String NAME = "Tom";
+}
+public interface MyInterface2 {
+    void method4();
+}
+// 接口可以多继承
+public interface MyInterface3 extends MyInterface, MyInterface2 {
+    void method5();
+}
+// Myclass has to rewrite all the methods in the interface inlcude the methods of the parent interface 
+public class MyClass implements MyInterface3 {
+    @Override
+    public void method1() {
+        System.out.println("method1");
+    }
+    @Override
+    public void method2() {
+        System.out.println("method2");
+    }
+    @Override
+    public void method3() {
+        System.out.println("method3");
+    }
+    @Override
+    public void method4() {
+        System.out.println("method4");
+    }
+    @Override
+    public void method5() {
+        System.out.println("method5");
+    }
+}
+
+```   
 
 
