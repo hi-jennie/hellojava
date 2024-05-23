@@ -703,16 +703,32 @@ public class Main {
 * all the **variables** in the interface are **final variables**(public static final by default)
 ```java
 public interface MyInterface {
+    // all the variables in the interface are final variables
+    int NUM = 10;
+    String NAME = "Tom";
     // all the methods in the interface are abstract methods
     void method1();
     void method2();
     void method3();
-    // all the variables in the interface are final variables
-    int NUM = 10;
-    String NAME = "Tom";
+    
+    
 }
 public interface MyInterface2 {
-    void method4();
+    default void method4();
+}
+public interface MyInterface4 {
+    default void method4();
+}
+public class MyClass1 implements MyInterface2, MyInterface4 {
+    @Override
+    // default method of these two interfaces have the same name
+    // so the subclass has to override the default method
+    public void method4() {
+        System.out.println("method4");
+    }
+}
+
+    
 }
 // 接口可以多继承
 public interface MyInterface3 extends MyInterface, MyInterface2 {
@@ -732,9 +748,6 @@ public class MyClass implements MyInterface3 {
     public void method3() {
         System.out.println("method3");
     }
-    @Override
-    public void method4() {
-        System.out.println("method4");
     }
     @Override
     public void method5() {
@@ -742,6 +755,263 @@ public class MyClass implements MyInterface3 {
     }
 }
 
-```   
+``` 
+JDK8 后新增的方法（default method和static method——带方法体的方法）
+(接口中默认的方法是抽象方法，如果不写default，则、、)
+* **default method**: a method that has a default implementation
+  * the subclass can choose to override the default method **or not**
+  * the default method is not an abstract method, so the subclass can choose to override it **or not**
+  * if the subclass wants to override the default method, the default keyword must be removed
+  * the default method can call the **static private default** method
 
+* **static method**: can't be overridden(因为没被添加到虚方法表中)
+  * the static method can be only called by the interface name
+  
+* **private method** :服务于默认和私有方法，抽取其中重复代码
+```java
+public interface MyInterface {
+    void method1();
+    void method2();
+    void method3();
+    default void method4() {
+        System.out.println("default method");
+        method6();
+    }
+    static void method5() {
+        System.out.println("static method");
+        method7()；
+    }
+    // 抽取重复代码在本接口中调用，对外界没有作用所以用private修饰
+    // 普通私有方法是给default method服务的
+    private void method6() {
+        System.out.println("private method");
+    }
+    // 静态方法要使用加上static
+    private static void method7() {
+      System.out.println("private method");
+    }
+}
+```
 
+## 26. interface 的运用
+接口类型 变量名 = new 实现类();
+```java
+public class Main {
+    public static void main(String[] args) {
+        MyInterface myInterface = new MyClass();
+        myInterface.method1();
+        
+    }
+}
+```
+adapter design pattern:适配器设计模式
+```java
+public interface MyInterface {
+    void method1();
+
+    void method2();
+
+    void method3();
+}
+// 加入我只想用其中的method3,必须要重写所有的方法
+public class MyClass implements MyInterface {
+    @Override
+    public void method1() {
+        System.out.println("method1");
+    }
+    @Override
+    public void method2() {
+        System.out.println("method2");
+    }
+    @Override
+    public void method3() {
+        System.out.println("method3");
+    }
+}
+// 适配器设计模式
+// 创建一个抽象类，实现接口，然后重写所有的方法，这样在实现类中就可以只重写需要的方法
+// abstract 避免其他类创建适配器类对象
+public abstract class MyAdapter implements MyInterface {
+    @Override
+    public void method1() {
+        // 空实现
+    }
+    @Override
+    public void method2() {
+    }
+    @Override
+    public void method3() {
+        System.out.println("method3");
+    }
+}
+// 然后让我的真正实现类继承我的适配器，就可以选择性重写了，因为如果直接implemet MyInterface的话，就必须重写所有的抽象方法
+public class MyClass extends MyAdapter {
+    @Override
+    public void method3() {
+        System.out.println("method3");
+    }
+}
+```
+## 27. inner class
+内部类表示的事物是外部类的一部分，内部类单独出现没有意义，具有强相关性
+* inner class: a class that is defined inside another class
+  * inner class can access the members of the outer class
+  * the outer class can access the members of the inner class by creating an object of the inner class
+  * the inner class can be private, protected, public, or default
+  
+```java
+public class Car {
+    private String carName;
+    private private int age = 10;
+    // inner class
+    public class Engine {
+        private String name;
+        private int age = 20;
+        public void info() {
+            private int age = 30
+            System.out.println("name: " + name + ", power: " + power);
+            // the inner class can access the members of the outer class
+            System.out.println(carName);
+            // there are three age variables
+            System.out.println(age);// 30
+            System.out.println(this.age);// 20
+            // Car.this记录的就是外部类的地址值
+            System.out.println(Car.this.age);// 10
+        }
+    // create a public method to return the innner object
+    private class Engine1 {
+      private String name;
+      private double power;
+      public void info() {
+        System.out.println("name: " + name + ", power: " + power);
+        // the inner class can access the members of the outer class
+        System.out.println(carName);
+      }    
+    }
+    public Engine getEngine1() {
+      return new Engine();
+    }
+    // the outer class can access the members of the inner class by creating an object of the inner class
+    public void test() {
+        Engine engine = new Engine();
+        engine.name = "engine";
+        engine.power = 100;
+        engine.info();
+    }
+    
+}
+// how to create an object of the inner class
+public class Main {
+    public static void main(String[] args) {
+        Car car = new Car();
+        Car.Engine engine = car.new Engine();
+        // 内部类会记录外部类的地址
+        // Car.Engine engine = new Car().new Engine();
+        engine.info();
+        // if the inner class is private, the outer class can't access the inner class
+        
+    }
+}
+```
+内部类的分类：
+* 成员内部类：写在成员位置，属于外部类的成员
+* 局部内部类：定义在方法里面，类似于方法里面的局部变量
+  * 外部无法使用，虚压在方法内部创建对象并使用
+  * 该类可以直接访问外部类成员，也不可以访问方法内的局部变量
+* 匿名内部类：没有名字的内部类
+* **静态内部类**：static修饰的内部类，只能访问外部类中用static修饰的成员，如果想访问非静态成员，需要创建外部类对象
+```java
+public class Outer{
+    int a = 10;
+    static int b = 20;
+    
+    static class Inner{
+        public void method(){
+            // 只能访问外部类中用static修饰的成员
+            System.out.println(b);
+            System.out.println(a);// error
+            // 因为a是非静态成员，只有才创建外部类对象时才存在
+            Outer outer = new Outer();
+            System.out.println(outer.a);
+        }
+        public static void method2(){
+            System.out.println(b);
+            // System.out.println(a);// error
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 不用创建外部类对象，直接创建内部类对象
+        Outer.Inner inner = new Outer.Inner();
+        inner.method();
+        // 直接不用对象调用静态内部类中的静态方法，推荐
+        Outer.Inner.method2();
+    }
+}
+```
+**局部内部类**
+```java
+public class Outer{
+    int a = 10;
+    public void method(){
+        int b = 20;
+        class Inner{
+            public void show(){
+                // 可以访问外部类的成员变量
+                System.out.println(a);
+                // 可以访问方法内的局部变量
+                System.out.println(b);
+            }
+        }
+        Inner inner = new Inner();
+        inner.show();
+    }
+}
+```
+**匿名内部类**
+```java
+public abstract class Animal{
+    public abstract void eat();
+        
+}
+
+public abstract interface Swim{
+    public abstract void swim();
+}
+
+public class Main {
+    public static void main(String[] args) {
+        // 花括号里面的才是一个真正的匿名内部类，前面写的一个类名，表示继承与Animal
+        new Animal(){
+            public void eat(){
+                System.out.println("eat");
+            }
+        }.eat(); // new是新创建的一个对象，表示可以之久调用里面的方法
+        // 前面写的是一个接口名，表示实现了这个接口，也叫接口实现类
+        new Swim(){
+            public void swim(){
+                System.out.println("swim");
+            }
+        }.swim();
+    }
+}
+// circumstances that need to use anonymous inner class
+public class Main {
+  public static void main(String[] args) {
+      test(
+           new Animal(){
+               // 直接创建一个匿名类调用test，因为这个匿名类只使用一次
+               // there is no need to create a seperate class 
+               @Override
+               System.out.println("this animal is eating"); 
+           }   
+      );
+  }
+  
+  public void test(Animal animal) {
+    animal.eat();
+  }
+}
+```
